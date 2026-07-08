@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: agentgateway
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: agentgateway-system
+  source:
+    repoURL: us-docker.pkg.dev/solo-public/enterprise-agentgateway/charts
+    chart: enterprise-agentgateway
+    targetRevision: {{ .Values.agw.version }}
+    helm:
+      values: |
+        licensing:
+          createSecret: false
+          licenseSecretRef:
+            name: enterprise-agentgateway-license
+            namespace: agentgateway-system
+  syncPolicy:
+    automated: { prune: true, selfHeal: true }
+    syncOptions: [ CreateNamespace=true ]

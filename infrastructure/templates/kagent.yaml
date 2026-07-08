@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kagent
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kagent
+  source:
+    repoURL: us-docker.pkg.dev/solo-public/kagent-enterprise-helm/charts
+    chart: kagent-enterprise
+    targetRevision: {{ .Values.kagent.version }}
+    helm:
+      values: |
+        licensing:
+          createSecret: false
+          licenseSecretRef:
+            name: enterprise-kagent-license
+            namespace: kagent
+        providers:
+          default: openAI
+          openAI:
+            apiKeySecretRef:
+              name: agent-openai
+              namespace: kagent
+        otel:
+          tracing:
+            enabled: true
+            exporter:
+              otlp:
+                endpoint: solo-enterprise-telemetry-collector.kagent.svc.cluster.local:4317
+                insecure: true
+  syncPolicy:
+    automated: { prune: true, selfHeal: true }
+    syncOptions: [ CreateNamespace=true ]

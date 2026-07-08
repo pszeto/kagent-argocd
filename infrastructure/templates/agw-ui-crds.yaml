@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kagent-crds
+  name: agw-ui-crds
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-2"
@@ -9,11 +9,11 @@ spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: kagent
+    namespace: agentgateway-system
   source:
-    repoURL: us-docker.pkg.dev/solo-public/kagent-enterprise-helm/charts
-    chart: kagent-enterprise-crds
-    targetRevision: 0.4.3
+    repoURL: us-docker.pkg.dev/solo-public/solo-enterprise-helm/charts
+    chart: management-crds
+    targetRevision: {{ index .Values "agw-ui" "version" }}
   syncPolicy:
     automated: { prune: true, selfHeal: true }
     syncOptions: [ CreateNamespace=true, ServerSideApply=true ]

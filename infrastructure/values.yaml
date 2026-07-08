@@ -1,0 +1,12 @@
+kagent:
+  version: "0.4.3"
+
+agw-ui:
+  version: "0.4.5"
+
+agw:
+  version: "v2026.6.3"
+
+grafanaPrometheus:
+  version: "80.4.2"
+  grafanaAdminPassword: "prom-operator"

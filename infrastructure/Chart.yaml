@@ -1,0 +1,4 @@
+apiVersion: v2
+name: cluster-infrastructure
+description: App-of-apps chart for cluster infrastructure
+version: 0.1.0

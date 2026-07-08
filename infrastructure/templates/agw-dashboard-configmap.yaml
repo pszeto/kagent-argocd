@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: agentgateway-dashboard
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  agentgateway-overview.json: |
+{{ .Files.Get "files/agentgateway-overview.json" | indent 4 }}
