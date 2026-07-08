@@ -16,8 +16,6 @@ spec:
     targetRevision: {{ index .Values "agw-ui" "version" }}
     helm:
       values: |
-        management-crds:
-          enabled: false
         licensing:
           licenseSecretRef:
             name: enterprise-agentgateway-license
