@@ -3,6 +3,8 @@ kind: PodMonitor
 metadata:
   name: data-plane-monitoring-agentgateway-metrics
   namespace: agentgateway-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   namespaceSelector:
     matchNames:

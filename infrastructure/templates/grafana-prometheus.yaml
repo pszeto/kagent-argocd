@@ -19,7 +19,7 @@ spec:
         alertmanager:
           enabled: false
         grafana:
-          adminPassword: {{ .Values.grafanaPrometheus.grafanaAdminPassword }}
+          adminPassword: {{ .Values.grafanaPrometheus.grafanaAdminPassword | quote }}
           service:
             type: ClusterIP
             port: 3000

@@ -31,7 +31,7 @@ spec:
         products:
           kagent:
             enabled: true
-            namespace: kagent-system
+            namespace: kagent
           agentgateway:
             enabled: true
             namespace: agentgateway-system

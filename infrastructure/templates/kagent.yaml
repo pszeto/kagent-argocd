@@ -25,7 +25,7 @@ spec:
           default: openAI
           openAI:
             apiKeySecretRef:
-              name: agent-openai
+              name: kagent-openai
               namespace: kagent
         otel:
           tracing:
