@@ -1,0 +1,34 @@
+# infrastructure/argocd/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"  # First priority
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://argoproj.github.io/argo-helm
+    chart: argo-cd
+    targetRevision: 7.7.21
+    helm:
+      values: |
+        server:
+          ingress:
+            enabled: true
+            hostname: argocd.example.com
+          extraArgs:
+            - --insecure
+        configs:
+          cm:
+            url: http://172.18.253.10
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
