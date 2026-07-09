@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kagent-mgmt
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kagent
+  source:
+    repoURL: us-docker.pkg.dev/solo-public/solo-enterprise-helm/charts/management
+    chart: management
+    targetRevision: {{ index .Values "management-ui" "version" }}
+    helm:
+      values: |
+        cluster: mgmt-cluster
+        licensing:
+          createSecret: false
+          licenseSecretRef:
+            name: enterprise-kagent-license
+            namespace: kagent
+        products:
+          kagent:
+            enabled: true
+            namespace: kagent
+          agentgateway:
+            enabled: true
+            namespace: agentgateway-system
+          mesh:
+            enabled: false
+          agentregistry:
+            enabled: true
+        clickhouse:
+          enabled: true
+        tracing:
+          verbose: true
+  syncPolicy:
+    automated: { prune: true, selfHeal: true }
+    syncOptions: [ CreateNamespace=true ]

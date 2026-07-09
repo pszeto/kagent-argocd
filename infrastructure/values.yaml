@@ -1,7 +1,7 @@
 kagent:
   version: "0.4.3"
 
-agw-ui:
+management-ui:
   version: "0.4.8"
 
 agw:
