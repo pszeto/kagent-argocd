@@ -1,7 +1,7 @@
 kagent:
   version: "0.4.3"
 
-management-ui:
+gloo-ui:
   version: "0.4.8"
 
 agw:

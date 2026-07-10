@@ -32,8 +32,10 @@ spec:
             enabled: true
             exporter:
               otlp:
-                endpoint: solo-enterprise-telemetry-collector.kagent.svc.cluster.local:4317
+                endpoint: solo-enterprise-telemetry-collector.solo-enterprise.svc.cluster.local:4317
                 insecure: true
+        oidc:
+          issuer: http://solo-enterprise-ui.solo-enterprise.svc.cluster.local:5556
   syncPolicy:
     automated: { prune: true, selfHeal: true }
     syncOptions: [ CreateNamespace=true ]

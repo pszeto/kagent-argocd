@@ -9,19 +9,19 @@ spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: kagent
+    namespace: solo-enterprise
   source:
     repoURL: us-docker.pkg.dev/solo-public/solo-enterprise-helm/charts
     chart: management
-    targetRevision: {{ index .Values "management-ui" "version" }}
+    targetRevision: {{ index .Values "gloo-ui" "version" }}
     helm:
       values: |
         cluster: mgmt-cluster
         licensing:
           createSecret: false
           licenseSecretRef:
-            name: enterprise-kagent-license
-            namespace: kagent
+            name: license-secret
+            namespace: solo-enterprise
         products:
           kagent:
             enabled: true

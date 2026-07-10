@@ -25,4 +25,13 @@ metadata:
 type: Opaque
 stringData:
   OPENAI_API_KEY: "${OPENAI_API_KEY}"
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: license-secret
+  namespace: solo-enterprise
+stringData:
+  solo-enterprise-license-key: "${GLOO_AGENTGATEWAY_LICENSE_KEY}"
 EOF
