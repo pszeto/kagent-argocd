@@ -18,9 +18,7 @@ spec:
       values: |
         licensing:
           createSecret: false
-          licenseSecretRef:
-            name: enterprise-agentgateway-license
-            namespace: agentgateway-system
+          secretName: enterprise-agentgateway-license
   syncPolicy:
     automated: { prune: true, selfHeal: true }
     syncOptions: [ CreateNamespace=true ]

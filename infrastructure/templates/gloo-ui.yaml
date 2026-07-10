@@ -19,9 +19,7 @@ spec:
         cluster: mgmt-cluster
         licensing:
           createSecret: false
-          licenseSecretRef:
-            name: license-secret
-            namespace: solo-enterprise
+          secretName: license-secret
         products:
           kagent:
             enabled: true
