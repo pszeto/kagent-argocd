@@ -34,4 +34,13 @@ metadata:
   namespace: solo-enterprise
 stringData:
   solo-enterprise-license-key: "${GLOO_AGENTGATEWAY_LICENSE_KEY}"
+---
+apiVersion: v1
+data:
+  clientSecret: YXV0b2F1dGgtZGVmYXVsdA==
+kind: Secret
+metadata:
+  name: kagent-enterprise-oidc-secret
+  namespace: kagent
+type: Opaque
 EOF

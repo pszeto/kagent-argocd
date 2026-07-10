@@ -26,7 +26,6 @@ spec:
           openAI:
             apiKeySecretRef:
               name: kagent-openai
-              namespace: kagent
         otel:
           tracing:
             enabled: true
