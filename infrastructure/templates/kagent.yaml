@@ -18,9 +18,7 @@ spec:
       values: |
         licensing:
           createSecret: false
-          licenseSecretRef:
-            name: enterprise-kagent-license
-            namespace: kagent
+          secretName: enterprise-kagent-license
         providers:
           default: openAI
           openAI:
@@ -34,6 +32,33 @@ spec:
                 insecure: true
         oidc:
           issuer: http://solo-enterprise-ui.solo-enterprise.svc.cluster.local:5556
+        argo-rollouts-agent:
+          enabled: true
+        cilium-debug-agent:
+          enabled: true
+        cilium-manager-agent:
+          enabled: true
+        cilium-policy-agent:
+          enabled: true
+        helm-agent:
+          enabled: true
+        istio-agent:
+          enabled: true
+        k8s-agent:
+          enabled: true
+        kgateway-agent:
+          enabled: true
+        observability-agent:
+          enabled: true
+        promql-agent:
+          enabled: true
+        # Tool server dependencies
+        grafana-mcp:
+          enabled: true
+        kagent-tools:
+          enabled: true
+        querydoc:
+          enabled: true
   syncPolicy:
     automated: { prune: true, selfHeal: true }
     syncOptions: [ CreateNamespace=true ]
